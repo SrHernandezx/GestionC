@@ -1,5 +1,9 @@
 package centralc;
 
+import autobuses.Autobuses;
+import administradores.Usuarios;
+import clientes.Clientes;
+
 
 public class CRUD extends javax.swing.JFrame {
 
@@ -26,7 +30,7 @@ public class CRUD extends javax.swing.JFrame {
         jButtonSalidas = new javax.swing.JButton();
         jButtonGraficas = new javax.swing.JButton();
         jButtonMasRegistros = new javax.swing.JButton();
-        jButtonChoferes1 = new javax.swing.JButton();
+        jButtonTickets = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,12 +112,12 @@ public class CRUD extends javax.swing.JFrame {
         jButtonMasRegistros.setToolTipText("Más.");
         jButtonMasRegistros.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        jButtonChoferes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Tickets.png"))); // NOI18N
-        jButtonChoferes1.setToolTipText("Boletos.");
-        jButtonChoferes1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jButtonChoferes1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTickets.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Tickets.png"))); // NOI18N
+        jButtonTickets.setToolTipText("Boletos.");
+        jButtonTickets.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jButtonTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonChoferes1ActionPerformed(evt);
+                jButtonTicketsActionPerformed(evt);
             }
         });
 
@@ -125,7 +129,7 @@ public class CRUD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonChoferes1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -155,7 +159,7 @@ public class CRUD extends javax.swing.JFrame {
                             .addComponent(jButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonAutobuses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jButtonChoferes1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonTickets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonChoferes, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,9 +221,9 @@ public class CRUD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGraficasActionPerformed
 
-    private void jButtonChoferes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChoferes1ActionPerformed
+    private void jButtonTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTicketsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonChoferes1ActionPerformed
+    }//GEN-LAST:event_jButtonTicketsActionPerformed
 
     
     public static void main(String args[]) {
@@ -253,12 +257,12 @@ public class CRUD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAutobuses;
     private javax.swing.JButton jButtonChoferes;
-    private javax.swing.JButton jButtonChoferes1;
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonGraficas;
     private javax.swing.JButton jButtonMasRegistros;
     private javax.swing.JButton jButtonRutas;
     private javax.swing.JButton jButtonSalidas;
+    private javax.swing.JButton jButtonTickets;
     private javax.swing.JButton jButtonUsuarios;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

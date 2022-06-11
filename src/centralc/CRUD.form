@@ -60,7 +60,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonSalidas" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
-                      <Component id="jButtonChoferes1" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jButtonTickets" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -99,7 +99,7 @@
                               <Component id="jButtonUsuarios" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButtonAutobuses" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jButtonChoferes1" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jButtonTickets" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jButtonChoferes" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
                   </Group>
@@ -260,7 +260,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonChoferes1">
+        <Component class="javax.swing.JButton" name="jButtonTickets">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagenes/Tickets.png"/>
@@ -273,7 +273,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonChoferes1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTicketsActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
