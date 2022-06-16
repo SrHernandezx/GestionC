@@ -1,7 +1,7 @@
 package autobuses;
 //
 
-import centralc.CRUD;
+import centralc.MenuPrincipal;
 
 
 public class Autobuses extends javax.swing.JFrame {

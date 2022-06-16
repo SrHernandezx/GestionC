@@ -3,12 +3,15 @@ package centralc;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class InicioSesion extends javax.swing.JFrame {
 
-   String usuario = "juan";
-   String contraseña = "juan12345";
+    private static InicioSesion instancia = null;
+    private static int intentos;
+    
+   
 
     public InicioSesion() {
 
@@ -16,8 +19,87 @@ public class InicioSesion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("CentralC.");
         this.setResizable(false);
+        OperacionesBD.levantarServidorXampp();
+        intentos = 0;
     }
 
+    public static InicioSesion getInstancia() {
+        
+        synchronized (InicioSesion.class) {
+            if (instancia == null) {
+                instancia = new InicioSesion();
+            }
+        }
+        return instancia;
+    }
+    
+     private void ingresar() {
+        
+        String usuario = jTextFieldUsuario.getText();
+        String contraseña = String.valueOf(jPasswordContraseña.getPassword());
+        String info[] = OperacionesBD.buscarUsuario(usuario);
+        
+        if (info != null){
+        
+        if (info[0].equals(usuario)) {
+            
+            if (info[1].equals(contraseña)) {
+                
+                JOptionPane.showMessageDialog(null, "Sistema: Bienvenido " + usuario, "AgendITA: Login", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                MenuPrincipal menu = MenuPrincipal.getInstancia();
+                menu.setVisible(true);
+
+            } else {
+                
+                intentos++;
+                
+                if (intentos == 3) {
+                    
+                    JOptionPane.showMessageDialog(null, "Número máximo de intentos excedido", "AgendITA: Login", JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+
+                }
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta", "AgendITA: Login", JOptionPane.ERROR_MESSAGE);
+                borrarFormulario();
+            }
+
+        } else {
+            intentos++;
+            
+            if (intentos == 3) {
+                JOptionPane.showMessageDialog(null, "Número máximo de intentos excedido", "AgendITA: Login", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
+            JOptionPane.showMessageDialog(null, "Usuario No escontrado", "AgendITA: Login", JOptionPane.ERROR_MESSAGE);
+            borrarFormulario();   
+            }    
+            
+            } else {
+
+                intentos++;
+                
+                if (intentos == 3) {
+                    JOptionPane.showMessageDialog(null, "Número máximo de intentos excedido", "AgendITA: Login", JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+
+                }
+                JOptionPane.showMessageDialog(null, "Usuario No encontrado", "AgendITA: Login", JOptionPane.ERROR_MESSAGE);
+                borrarFormulario();
+            }
+        }
+    
+    private void borrarFormulario() {
+        
+        jTextFieldUsuario.setText("");
+        jPasswordContraseña.setText("");
+        jTextFieldUsuario.requestFocus();
+    }
+    
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,11 +108,11 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
-        jButtonIniciarSesion = new javax.swing.JButton();
+        jButtonAtras = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordContraseña = new javax.swing.JPasswordField();
-        jButtonIniciarSesion1 = new javax.swing.JButton();
+        jButtonIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -62,11 +144,11 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jButtonIniciarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonIniciarSesion.setText("Atrás");
-        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonAtras.setText("Atrás");
+        jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIniciarSesionActionPerformed(evt);
+                jButtonAtrasActionPerformed(evt);
             }
         });
 
@@ -77,7 +159,6 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3.setToolTipText("");
         jLabel3.setMinimumSize(new java.awt.Dimension(32, 3));
 
-        jPasswordContraseña.setText("********");
         jPasswordContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPasswordContraseñaMouseEntered(evt);
@@ -91,12 +172,17 @@ public class InicioSesion extends javax.swing.JFrame {
                 jPasswordContraseñaActionPerformed(evt);
             }
         });
+        jPasswordContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordContraseñaKeyTyped(evt);
+            }
+        });
 
-        jButtonIniciarSesion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonIniciarSesion1.setText("Aceptar");
-        jButtonIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIniciarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonIniciarSesion.setText("Aceptar");
+        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIniciarSesion1ActionPerformed(evt);
+                jButtonIniciarSesionActionPerformed(evt);
             }
         });
 
@@ -107,7 +193,7 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonIniciarSesion)
+                    .addComponent(jButtonAtras)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -124,7 +210,7 @@ public class InicioSesion extends javax.swing.JFrame {
                             .addComponent(jPasswordContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jButtonIniciarSesion1)))
+                        .addComponent(jButtonIniciarSesion)))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,8 +234,8 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonIniciarSesion)
-                    .addComponent(jButtonIniciarSesion1))
+                    .addComponent(jButtonAtras)
+                    .addComponent(jButtonIniciarSesion))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -173,13 +259,13 @@ public class InicioSesion extends javax.swing.JFrame {
         return retValue;
     }
    
-    private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
+    private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
 
-        CRUD a = new CRUD();
+        MenuPrincipal a = new MenuPrincipal();
         a.setVisible(true);
         this.setVisible(false);
        
-    }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
+    }//GEN-LAST:event_jButtonAtrasActionPerformed
    
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
@@ -213,9 +299,16 @@ public class InicioSesion extends javax.swing.JFrame {
         jPasswordContraseña.setBackground(Color.WHITE);
     }//GEN-LAST:event_jPasswordContraseñaMouseExited
 
-    private void jButtonIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesion1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonIniciarSesion1ActionPerformed
+    private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
+        ingresar();
+    }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
+
+    private void jPasswordContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordContraseñaKeyTyped
+        char car = evt.getKeyChar();
+        if (car == KeyEvent.VK_ENTER) {
+            ingresar();
+        }
+    }//GEN-LAST:event_jPasswordContraseñaKeyTyped
 
     public static void main(String args[]) {
        
@@ -246,8 +339,8 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonIniciarSesion;
-    private javax.swing.JButton jButtonIniciarSesion1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

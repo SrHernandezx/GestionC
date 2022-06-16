@@ -5,10 +5,10 @@ import administradores.Usuarios;
 import clientes.Clientes;
 
 
-public class CRUD extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {
 
- 
-    public CRUD() {
+ public static MenuPrincipal instancia = null;
+    public MenuPrincipal() {
         
         initComponents();
         this.setLocationRelativeTo(null);
@@ -16,7 +16,15 @@ public class CRUD extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    
+    public static MenuPrincipal getInstancia() {
+        
+        synchronized (MenuPrincipal.class) {
+            if (instancia == null) {
+                instancia = new MenuPrincipal();
+            }
+        }
+        return instancia;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -236,20 +244,21 @@ public class CRUD extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUD().setVisible(true);
+                new MenuPrincipal().setVisible(true);
             }
         });
     }

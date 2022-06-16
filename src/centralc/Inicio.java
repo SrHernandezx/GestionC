@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 
 public class Inicio extends javax.swing.JFrame {
 
+    private static Inicio instancia = null;
+   
     public Inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -96,6 +98,15 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+public static Inicio getInstancia() {
+        
+        synchronized (Inicio.class) {
+            if (instancia == null) {
+                instancia = new Inicio();
+            }
+        }
+        return instancia;
+    }
 
     private void jButtonInicioSesionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInicioSesionMouseReleased
         // TODO add your handling code here:
